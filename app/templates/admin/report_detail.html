@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Examen du signalement — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  <p><a href="/admin">&larr; Retour à la file</a></p>
+  <h1>Signalement #{{ report.id }}</h1>
+
+  <dl class="report-item__meta">
+    <div><dt>Numéro signalé</dt><dd>{{ report.phone_number.number }}</dd></div>
+    <div><dt>Type</dt><dd>{{ scam_type_labels.get(report.scam_type, report.scam_type) }}</dd></div>
+    <div><dt>Premier contact</dt><dd>{{ channel_labels.get(report.first_contact_channel, report.first_contact_channel) }}</dd></div>
+    <div><dt>Montant rapporté</dt><dd>{{ report.amount_lost or '—' }} {{ report.currency if report.amount_lost else '' }}</dd></div>
+    <div><dt>Tentative de recontact</dt><dd>{{ 'Oui — ' + (report.recontact_outcome or '') if report.recontact_attempted else 'Non' }}</dd></div>
+    <div><dt>Reçu le</dt><dd>{{ report.created_at.strftime('%d/%m/%Y %H:%M') }}</dd></div>
+  </dl>
+
+  <h2>Récit</h2>
+  <p>{{ report.story }}</p>
+
+  <h2>Coordonnées du déclarant (usage interne, jamais publié)</h2>
+  <dl class="report-item__meta">
+    <div><dt>Nom</dt><dd>{{ report.declarant_name or '—' }}</dd></div>
+    <div><dt>Email</dt><dd>{{ report.declarant_email or '—' }}</dd></div>
+    <div><dt>Téléphone</dt><dd>{{ report.declarant_phone or '—' }}</dd></div>
+  </dl>
+
+  <h2>Pièces jointes</h2>
+  {% if report.evidences %}
+  <ul>
+    {% for ev in report.evidences %}
+    <li><a href="/admin/preuve/{{ ev.id }}">{{ ev.original_filename }}</a></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Aucune pièce jointe.</p>
+  {% endif %}
+
+  <h2>Historique sur ce numéro</h2>
+  <p>{{ report.phone_number.reports|length }} signalement(s) au total sur ce numéro, score actuel : {{ report.phone_number.score }}/100 ({{ report.phone_number.score_tier }}).</p>
+
+  {% if report.status.value == 'en_attente' %}
+  <h2>Décision</h2>
+  <form action="/admin/signalement/{{ report.id }}/approuver" method="post" class="form">
+    <label for="note_a">Note de modération (facultatif)</label>
+    <textarea id="note_a" name="note" rows="2"></textarea>
+    <button type="submit" class="btn btn--primary">Approuver et publier</button>
+  </form>
+  <form action="/admin/signalement/{{ report.id }}/rejeter" method="post" class="form">
+    <label for="note_r">Motif du rejet</label>
+    <textarea id="note_r" name="note" rows="2"></textarea>
+    <button type="submit" class="btn btn--secondary">Rejeter</button>
+  </form>
+  {% else %}
+  <p><strong>Statut :</strong> {{ report.status.value }}{% if report.moderator_note %} — {{ report.moderator_note }}{% endif %}</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ numero }} — Résultat de vérification — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  <p><a href="/rechercher">&larr; Vérifier un autre numéro</a></p>
+  <h1>{{ numero }}</h1>
+
+  <div class="score-card score-card--{{ score.tier }}">
+    <div class="score-card__number">{{ score.score }}<span>/100</span></div>
+    <p class="score-card__label">{{ score.label }}</p>
+  </div>
+
+  {% if aliases %}
+  <section class="aliases">
+    <h2>Comptes associés signalés à ce numéro</h2>
+    <ul>
+      {% for a in aliases %}<li>{{ a.platform }} — {{ a.handle }}</li>{% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if reports %}
+  <section class="reports-list">
+    <h2>Signalements publiés ({{ reports|length }})</h2>
+    <p class="helper-text">
+      L'identité des personnes ayant signalé ce numéro n'est jamais publiée.
+      Ces signalements reflètent des témoignages examinés par la modération ;
+      ils ne constituent pas une décision judiciaire.
+    </p>
+    {% for r in reports %}
+    <article class="report-item">
+      <header>
+        <span class="badge">{{ scam_type_labels.get(r.scam_type, r.scam_type) }}</span>
+        <time datetime="{{ r.created_at.isoformat() }}">{{ r.created_at.strftime('%d/%m/%Y') }}</time>
+      </header>
+      <p>{{ r.story }}</p>
+      <dl class="report-item__meta">
+        <div><dt>Premier contact</dt><dd>{{ channel_labels.get(r.first_contact_channel, r.first_contact_channel) }}</dd></div>
+        {% if r.amount_lost %}<div><dt>Montant rapporté</dt><dd>{{ r.amount_lost }} {{ r.currency }}</dd></div>{% endif %}
+        {% if r.recontact_attempted %}<div><dt>Tentative de recontact</dt><dd>{{ recontact_labels.get(r.recontact_outcome, r.recontact_outcome) }}</dd></div>{% endif %}
+      </dl>
+    </article>
+    {% endfor %}
+  </section>
+  {% else %}
+  <p>Aucun signalement publié pour ce numéro à ce jour.</p>
+  {% endif %}
+
+  <section class="cta-box">
+    <p><strong>Vous avez vécu une mauvaise expérience avec ce numéro ?</strong></p>
+    <a class="btn btn--primary" href="/signaler">Signaler ce numéro</a>
+    <p><strong>Ce numéro vous appartient et vous contestez un signalement ?</strong></p>
+    <a class="btn btn--secondary" href="/contester?numero={{ numero }}">Contester</a>
+  </section>
+</section>
+{% endblock %}

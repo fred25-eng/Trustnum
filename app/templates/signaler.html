@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Signaler un numéro — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  <h1>Signaler un numéro</h1>
+  <p class="helper-text">
+    Un signalement n'est pas une accusation nominative : seul le numéro reste
+    associé publiquement aux signalements, jamais votre identité ni une affirmation
+    de culpabilité. Chaque signalement est examiné par la modération avant publication,
+    et le numéro signalé dispose d'un délai pour répondre avant que le signalement
+    pèse pleinement dans le score public.
+  </p>
+
+  {% if erreurs %}
+  <div class="alert alert--error" role="alert">
+    <ul>{% for e in erreurs %}<li>{{ e }}</li>{% endfor %}</ul>
+  </div>
+  {% endif %}
+
+  <form action="/signaler" method="post" enctype="multipart/form-data" class="form" novalidate>
+    <input type="hidden" name="rendered_at" value="{{ now_ts() }}">
+    <div class="honeypot" aria-hidden="true">
+      <label for="site_internet">Laissez ce champ vide</label>
+      <input type="text" id="site_internet" name="site_internet" tabindex="-1" autocomplete="off">
+    </div>
+
+    <fieldset>
+      <legend>Le numéro concerné</legend>
+      <label for="numero_signale">Numéro de téléphone signalé *</label>
+      <input type="tel" id="numero_signale" name="numero_signale" required
+             value="{{ valeurs.get('numero_signale', '') }}" placeholder="+229 90 00 00 00">
+
+      <div class="form-row">
+        <div>
+          <label for="alias_plateforme">Compte associé (facultatif)</label>
+          <select id="alias_plateforme" name="alias_plateforme">
+            <option value="">— Aucun —</option>
+            <option value="tiktok">TikTok</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="site_web">Site web</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div>
+          <label for="alias_identifiant">Identifiant du compte</label>
+          <input type="text" id="alias_identifiant" name="alias_identifiant" placeholder="@pseudo ou lien">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Ce qui s'est passé</legend>
+      <label for="scam_type">Type de problème *</label>
+      <select id="scam_type" name="scam_type" required>
+        {% for value, label in scam_types %}
+        <option value="{{ value }}" {% if valeurs.get('scam_type') == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="first_contact_channel">Où avez-vous été contacté la première fois ? *</label>
+      <select id="first_contact_channel" name="first_contact_channel" required>
+        {% for value, label in contact_channels %}
+        <option value="{{ value }}" {% if valeurs.get('first_contact_channel') == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="story">Récit détaillé * <span class="helper-text">(dates, ce qui a été proposé, ce qui s'est passé — 30 caractères minimum)</span></label>
+      <textarea id="story" name="story" rows="6" required minlength="30">{{ valeurs.get('story', '') }}</textarea>
+
+      <label for="amount_lost">Montant perdu en FCFA (facultatif)</label>
+      <input type="number" id="amount_lost" name="amount_lost" min="0" value="{{ valeurs.get('amount_lost', '') }}">
+    </fieldset>
+
+    <fieldset>
+      <legend>Avez-vous tenté de recontacter ce numéro après coup ? *</legend>
+      <p class="helper-text">Cette information compte beaucoup : un silence après tentative de recontact distingue une arnaque d'un simple retard de livraison.</p>
+      <label class="radio"><input type="radio" name="recontact_attempted" value="oui" required {% if valeurs.get('recontact_attempted') == 'oui' %}checked{% endif %}> Oui, j'ai tenté de le recontacter</label>
+      <label class="radio"><input type="radio" name="recontact_attempted" value="non" {% if valeurs.get('recontact_attempted') == 'non' %}checked{% endif %}> Non</label>
+
+      <label for="recontact_outcome">Qu'est-ce qui s'est passé ?</label>
+      <select id="recontact_outcome" name="recontact_outcome">
+        <option value="">—</option>
+        {% for value, label in recontact_outcomes %}
+        <option value="{{ value }}" {% if valeurs.get('recontact_outcome') == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>Preuves (facultatif, jusqu'à 10 fichiers, 4 Mo max chacun)</legend>
+      <p class="helper-text">Captures de conversation, reçu de dépôt Mobile Money, etc. Visibles uniquement par la modération, jamais publiées.</p>
+      <label for="evidences">Fichiers (image ou PDF)</label>
+      <input type="file" id="evidences" name="evidences" multiple accept="image/png,image/jpeg,image/webp,application/pdf">
+    </fieldset>
+
+    <fieldset>
+      <legend>Vos coordonnées (facultatif, jamais publiées)</legend>
+      <p class="helper-text">Utile uniquement si la modération a besoin de vous recontacter pour examiner le dossier.</p>
+      <div class="form-row">
+        <div><label for="declarant_name">Nom</label><input type="text" id="declarant_name" name="declarant_name"></div>
+        <div><label for="declarant_email">Email</label><input type="email" id="declarant_email" name="declarant_email"></div>
+        <div><label for="declarant_phone">Téléphone</label><input type="tel" id="declarant_phone" name="declarant_phone"></div>
+      </div>
+    </fieldset>
+
+    <p class="helper-text">
+      En soumettant ce formulaire, vous confirmez rapporter des faits observés et
+      non de simples soupçons, conformément à nos <a href="/cgu">conditions d'utilisation</a>.
+      Les faux témoignages exposent à un retrait et peuvent engager votre responsabilité.
+    </p>
+
+    <button type="submit" class="btn btn--primary">Transmettre le signalement</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Vérifier un numéro — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  <h1>Vérifier un numéro</h1>
+  {% if erreur %}
+  <p class="alert alert--error" role="alert">Numéro invalide. Utilisez un format comme +229 90 00 00 00 ou 90 00 00 00.</p>
+  {% endif %}
+  <form action="/rechercher" method="get" class="form">
+    <label for="numero">Numéro de téléphone</label>
+    <input type="tel" id="numero" name="numero" placeholder="+229 90 00 00 00" required autofocus>
+    <button type="submit" class="btn btn--primary">Vérifier</button>
+  </form>
+  <p class="helper-text">
+    Aucun résultat ne garantit qu'une transaction est sûre : l'absence de signalement
+    signifie seulement qu'aucun signalement n'a encore été publié pour ce numéro.
+  </p>
+</section>
+{% endblock %}

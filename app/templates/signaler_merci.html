@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Signalement transmis — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  {% if filtre %}
+  <h1>Merci</h1>
+  <p>Votre signalement a été reçu.</p>
+  {% else %}
+  <h1>Signalement transmis</h1>
+  <p>
+    Merci. Votre signalement concernant <strong>{{ numero }}</strong> est en file de
+    modération. Il ne sera visible publiquement qu'après examen, et le numéro
+    signalé disposera d'un délai pour répondre avant que le signalement pèse
+    pleinement dans le score affiché.
+  </p>
+  <p><a href="/numero/{{ numero.lstrip('+') }}">Voir la fiche de ce numéro</a></p>
+  {% endif %}
+  <p><a href="/">Retour à l'accueil</a></p>
+</section>
+{% endblock %}

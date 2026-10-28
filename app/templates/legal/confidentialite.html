@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Politique de confidentialité — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow prose">
+  <h1>Politique de confidentialité</h1>
+
+  <h2>Cadre légal</h2>
+  <p>
+    Ce traitement de données personnelles est soumis à la Loi n°2017-20 portant
+    Code du numérique en République du Bénin, sous le contrôle de l'Autorité de
+    Protection des Données Personnelles (APDP).
+  </p>
+
+  <h2>Données collectées</h2>
+  <p><strong>Lors d'un signalement :</strong> le numéro signalé, les éventuels comptes
+  associés, le récit transmis, le montant rapporté, les pièces jointes, et —
+  facultativement — le nom, l'email et le téléphone du déclarant.</p>
+  <p><strong>Lors d'une contestation :</strong> l'email de contact et le message transmis.</p>
+
+  <h2>Qui voit quoi</h2>
+  <p>
+    Sont rendus publics, après modération : le numéro, les comptes associés
+    signalés, le type de problème, le récit, et le score calculé. Ne sont
+    <strong>jamais rendus publics</strong> : l'identité du déclarant, ses
+    coordonnées, et les pièces jointes — accessibles uniquement à la modération.
+  </p>
+
+  <h2>Durée de conservation</h2>
+  <p>
+    Les signalements publiés sont conservés tant qu'ils restent pertinents pour
+    l'objet du service. Les coordonnées du déclarant sont conservées 24 mois
+    après le traitement du signalement, puis supprimées ou anonymisées. Les
+    pièces jointes sont conservées 12 mois après la décision de modération, sauf
+    contestation en cours.
+  </p>
+
+  <h2>Vos droits</h2>
+  <p>
+    Conformément à la loi béninoise sur la protection des données personnelles,
+    toute personne concernée (déclarant ou personne associée à un numéro signalé)
+    peut demander l'accès, la rectification, la suppression de ses données, ou
+    s'opposer à leur traitement, en écrivant à {{ contact_email }} ou via la page
+    <a href="/contester">Contester</a> pour tout ce qui concerne un numéro.
+  </p>
+
+  <h2>Sécurité</h2>
+  <p>
+    Les pièces jointes et coordonnées des déclarants ne sont accessibles qu'aux
+    comptes de modération authentifiés. Aucune donnée personnelle collectée via
+    les formulaires n'est transmise à un tiers à des fins commerciales.
+  </p>
+</section>
+{% endblock %}

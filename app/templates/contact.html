@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Contact — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow prose">
+  <h1>Contact</h1>
+  <p>
+    Pour signaler un numéro, utilisez le formulaire <a href="/signaler">Signaler</a>.
+    Pour contester un signalement, utilisez le formulaire <a href="/contester">Contester</a>.
+  </p>
+  <p>Pour toute autre question : <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
+</section>
+{% endblock %}

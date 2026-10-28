@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Statistiques — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  <h1>Statistiques</h1>
+  <div class="stats-grid">
+    <div class="stat-box"><strong>{{ total_numeros }}</strong><span>numéros dans la base</span></div>
+    <div class="stat-box"><strong>{{ total_publies }}</strong><span>signalements publiés</span></div>
+    <div class="stat-box"><strong>{{ total_en_attente }}</strong><span>en cours de modération</span></div>
+  </div>
+
+  {% if par_type %}
+  <h2>Répartition par type de problème</h2>
+  <table class="data-table">
+    <caption class="sr-only">Nombre de signalements publiés par type</caption>
+    <thead><tr><th scope="col">Type</th><th scope="col">Signalements publiés</th></tr></thead>
+    <tbody>
+      {% for type_value, count in par_type %}
+      <tr><td>{{ scam_type_labels.get(type_value, type_value) }}</td><td>{{ count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</section>
+{% endblock %}

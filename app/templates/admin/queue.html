@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}File de modération — TrustNum{% endblock %}
+{% block content %}
+<section class="container">
+  <div class="admin-header">
+    <h1>File de modération</h1>
+    <p>Connecté en tant que {{ admin.username }} — <a href="/admin/deconnexion">Se déconnecter</a></p>
+  </div>
+
+  <h2>Signalements en attente ({{ reports|length }})</h2>
+  {% if reports %}
+  <table class="data-table">
+    <thead><tr><th scope="col">Numéro</th><th scope="col">Type</th><th scope="col">Reçu le</th><th scope="col"></th></tr></thead>
+    <tbody>
+      {% for r in reports %}
+      <tr>
+        <td>{{ r.phone_number.number }}</td>
+        <td>{{ r.scam_type }}</td>
+        <td>{{ r.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+        <td><a href="/admin/signalement/{{ r.id }}" class="btn btn--small">Examiner</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>Aucun signalement en attente.</p>
+  {% endif %}
+
+  <h2>Contestations ouvertes ({{ contestations|length }})</h2>
+  {% if contestations %}
+  <table class="data-table">
+    <thead><tr><th scope="col">Numéro</th><th scope="col">Email</th><th scope="col">Message</th><th scope="col">Reçue le</th><th scope="col"></th></tr></thead>
+    <tbody>
+      {% for c in contestations %}
+      <tr>
+        <td>{{ c.phone_number.number }}</td>
+        <td>{{ c.contact_email }}</td>
+        <td>{{ c.message[:120] }}{% if c.message|length > 120 %}…{% endif %}</td>
+        <td>{{ c.created_at.strftime('%d/%m/%Y') }}</td>
+        <td>
+          <form action="/admin/contestation/{{ c.id }}/traiter" method="post">
+            <button type="submit" class="btn btn--small">Marquer traitée</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>Aucune contestation ouverte.</p>
+  {% endif %}
+</section>
+{% endblock %}

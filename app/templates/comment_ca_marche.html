@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Comment ça marche — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow prose">
+  <h1>Comment ça marche</h1>
+
+  <h2>Ce que TrustNum affirme, et ce qu'il n'affirme pas</h2>
+  <p>
+    TrustNum ne rend aucun jugement et n'affirme jamais qu'une personne précise
+    est coupable d'une arnaque. La plateforme expose uniquement des signalements
+    rattachés à un numéro de téléphone, jamais une identité. Le score affiché
+    mesure un niveau de signal communautaire, pas une vérité judiciaire établie.
+  </p>
+
+  <h2>Le numéro, identifiant central</h2>
+  <p>
+    Tout signalement est rattaché à un numéro de téléphone, car c'est en général
+    le point de contact le plus stable et le plus coûteux à changer pour un
+    arnaqueur — notamment lorsqu'il correspond aussi au numéro Mobile Money
+    utilisé pour recevoir un dépôt. Les comptes TikTok, Facebook ou Instagram
+    associés sont rattachés à ce numéro comme compléments d'identification, pas
+    comme entités indépendantes.
+  </p>
+
+  <h2>Le score de confiance</h2>
+  <p>Le calcul respecte trois règles :</p>
+  <ul>
+    <li>
+      <strong>Un signalement isolé reste un signalement isolé.</strong> Même avec
+      des preuves, une seule déclaration ne peut jamais produire un score élevé —
+      elle est affichée avec la mention « non corroboré ».
+    </li>
+    <li>
+      <strong>La corroboration entre plusieurs signalements indépendants</strong>
+      est ce qui fait monter le score : plusieurs personnes non liées entre elles
+      rapportant un problème similaire sur le même numéro.
+    </li>
+    <li>
+      <strong>La tentative de recontact documentée</strong> pèse dans le calcul :
+      un silence total ou un blocage après paiement est un signal plus fort qu'une
+      simple déclaration de non-livraison, qui peut aussi correspondre à un retard
+      légitime.
+    </li>
+  </ul>
+
+  <h2>Le droit de réponse</h2>
+  <p>
+    Lorsqu'un signalement est approuvé par la modération, le numéro concerné
+    dispose d'un délai avant que ce signalement pèse pleinement dans le score
+    public. Un numéro qui reste silencieux après notification renforce lui-même
+    le signal ; un numéro qui répond et clarifie la situation peut faire corriger
+    ou retirer un signalement infondé via la page <a href="/contester">Contester</a>.
+  </p>
+
+  <h2>La modération</h2>
+  <p>
+    Chaque signalement est examiné par une personne avant publication. Aucune
+    décision de publication n'est automatisée à ce stade. Les preuves jointes à
+    un signalement ne sont jamais rendues publiques, elles ne servent qu'à
+    l'examen du dossier.
+  </p>
+</section>
+{% endblock %}

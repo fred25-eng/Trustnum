@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Contester un signalement — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  <h1>Contester un signalement</h1>
+  <p class="helper-text">
+    Vous estimez qu'un numéro vous appartenant a été signalé à tort, ou qu'un
+    signalement publié est inexact ? Expliquez votre situation ci-dessous. Votre
+    demande est examinée par la modération, qui peut retirer un signalement infondé.
+  </p>
+
+  {% if erreurs %}
+  <div class="alert alert--error" role="alert">
+    <ul>{% for e in erreurs %}<li>{{ e }}</li>{% endfor %}</ul>
+  </div>
+  {% endif %}
+
+  <form action="/contester" method="post" class="form">
+    <div class="honeypot" aria-hidden="true">
+      <label for="site_internet">Laissez ce champ vide</label>
+      <input type="text" id="site_internet" name="site_internet" tabindex="-1" autocomplete="off">
+    </div>
+
+    <label for="numero">Numéro concerné *</label>
+    <input type="tel" id="numero" name="numero" required value="{{ numero }}">
+
+    <label for="contact_email">Votre email *</label>
+    <input type="email" id="contact_email" name="contact_email" required>
+
+    <label for="message">Votre contestation *</label>
+    <textarea id="message" name="message" rows="6" required minlength="20"
+      placeholder="Expliquez pourquoi ce signalement est, selon vous, infondé ou inexact."></textarea>
+
+    <button type="submit" class="btn btn--primary">Envoyer la contestation</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Connexion modération — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  <h1>Connexion modération</h1>
+  {% if erreur %}<p class="alert alert--error" role="alert">Identifiants incorrects.</p>{% endif %}
+  <form action="/admin/connexion" method="post" class="form">
+    <label for="username">Identifiant</label>
+    <input type="text" id="username" name="username" required autofocus>
+    <label for="password">Mot de passe</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit" class="btn btn--primary">Se connecter</button>
+  </form>
+</section>
+{% endblock %}

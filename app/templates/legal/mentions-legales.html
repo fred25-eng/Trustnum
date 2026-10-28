@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Mentions légales — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow prose">
+  <h1>Mentions légales</h1>
+  <p class="alert alert--info">
+    Modèle à compléter avant mise en ligne réelle : les champs entre crochets
+    doivent être remplacés par les informations exactes de l'exploitant du site
+    (idéalement une entité déclarée — entreprise individuelle ou société — plutôt
+    qu'une personne anonyme, ce qui renforce l'accès au statut d'hébergeur de
+    contenu plutôt qu'à celui d'éditeur).
+  </p>
+
+  <h2>Éditeur du site</h2>
+  <p>
+    [Nom de l'exploitant ou de l'entreprise], [statut juridique],
+    [adresse au Bénin], [numéro d'identification / RCCM si applicable],
+    joignable à {{ contact_email }}.
+  </p>
+
+  <h2>Hébergement</h2>
+  <p>[Nom et adresse de l'hébergeur technique].</p>
+
+  <h2>Statut du contenu publié par les utilisateurs</h2>
+  <p>
+    TrustNum héberge des signalements soumis par ses utilisateurs. Ces
+    signalements sont examinés par une modération humaine avant publication,
+    mais reflètent des témoignages et non des faits établis par l'éditeur du
+    site. Un signalement publié ne constitue pas une décision judiciaire ni une
+    accusation portée par TrustNum lui-même.
+  </p>
+  <p>
+    Conformément au régime de responsabilité applicable aux hébergeurs de
+    contenu généré par les utilisateurs, TrustNum retire ou suspend tout
+    signalement manifestement illicite ou infondé dès qu'il en a connaissance,
+    via le formulaire de <a href="/contester">contestation</a>.
+  </p>
+
+  <h2>Droit applicable et juridiction</h2>
+  <p>
+    Les présentes mentions légales ainsi que l'utilisation du site sont soumises
+    au droit béninois. Tout litige relatif à l'utilisation du site relève de la
+    compétence exclusive des juridictions compétentes de la République du Bénin.
+  </p>
+
+  <h2>Limitation de responsabilité</h2>
+  <p>
+    TrustNum s'efforce de modérer sérieusement les signalements soumis, sans
+    garantir l'exactitude, l'exhaustivité ou l'actualité des informations
+    publiées. L'absence de signalement pour un numéro ne constitue pas une
+    garantie de fiabilité de ce numéro. L'utilisation des informations du site
+    relève de la responsabilité de chaque utilisateur.
+  </p>
+</section>
+{% endblock %}

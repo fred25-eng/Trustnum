@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ numero }} — Aucun signalement — TrustNum{% endblock %}
+{% block content %}
+<section class="container page-narrow">
+  <p><a href="/rechercher">&larr; Vérifier un autre numéro</a></p>
+  <h1>{{ numero }}</h1>
+  <div class="score-card score-card--aucun_signalement">
+    <div class="score-card__number">—</div>
+    <p class="score-card__label">Aucun signalement publié pour ce numéro à ce jour.</p>
+  </div>
+  <p class="helper-text">
+    Cela ne garantit pas que la transaction est sûre : cela signifie seulement
+    qu'aucun signalement n'a encore été soumis ou publié pour ce numéro. Restez
+    prudent, surtout pour un dépôt avant livraison.
+  </p>
+  <section class="cta-box">
+    <p><strong>Ce numéro vous a posé problème ?</strong></p>
+    <a class="btn btn--primary" href="/signaler">Signaler ce numéro</a>
+  </section>
+</section>
+{% endblock %}

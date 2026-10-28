@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}TrustNum — Vérifiez un numéro avant de payer{% endblock %}</title>
+<meta name="description" content="{% block description %}TrustNum recense les signalements d'arnaques liées à un numéro de téléphone ou Mobile Money au Bénin. Vérifiez un numéro avant d'envoyer un dépôt.{% endblock %}">
+<link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="TrustNum">
+<meta property="og:title" content="{% block og_title %}TrustNum — Vérifiez un numéro avant de payer{% endblock %}">
+<meta property="og:description" content="{% block og_description %}Base de signalements communautaire pour éviter les arnaques au dépôt Mobile Money au Bénin.{% endblock %}">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu-principal">Aller au contenu principal</a>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="logo">TrustNum<span class="logo__dot">.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-principale" id="nav-toggle">
+      <span class="sr-only">Menu</span>
+      <span aria-hidden="true">☰</span>
+    </button>
+    <nav id="nav-principale" class="site-nav" aria-label="Navigation principale">
+      <a href="/rechercher">Vérifier un numéro</a>
+      <a href="/signaler">Signaler</a>
+      <a href="/contester">Contester</a>
+      <a href="/statistiques">Statistiques</a>
+      <a href="/comment-ca-marche">Comment ça marche</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu-principal">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__col">
+      <strong>TrustNum</strong>
+      <p>Vérification communautaire de numéros de téléphone et Mobile Money, Bénin.</p>
+      <p class="disclaimer">Un signalement publié ne constitue pas une décision judiciaire. Il reflète des témoignages d'utilisateurs, examinés par la modération avant publication.</p>
+    </div>
+    <div class="site-footer__col">
+      <h2>Plateforme</h2>
+      <a href="/a-propos">À propos</a>
+      <a href="/comment-ca-marche">Comment ça marche</a>
+      <a href="/statistiques">Statistiques</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="site-footer__col">
+      <h2>Informations légales</h2>
+      <a href="/mentions-legales">Mentions légales</a>
+      <a href="/confidentialite">Confidentialité</a>
+      <a href="/cgu">Conditions d'utilisation</a>
+    </div>
+  </div>
+  <p class="site-footer__copy container">© {{ current_year() }} TrustNum — Bénin.</p>
+</footer>
+
+<script src="/static/js/main.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero container">
+  <h1>Avant d'envoyer un dépôt, vérifiez le numéro.</h1>
+  <p class="hero__lead">
+    TrustNum recense les signalements d'arnaques liées à un numéro de téléphone
+    ou à un compte Mobile Money au Bénin — pour que le réflexe de vérification
+    arrive avant le paiement, pas après.
+  </p>
+  <form action="/rechercher" method="get" class="hero__search" role="search">
+    <label for="numero" class="sr-only">Numéro de téléphone à vérifier</label>
+    <input type="tel" id="numero" name="numero" placeholder="Ex. +229 90 00 00 00" required>
+    <button type="submit" class="btn btn--primary">Vérifier ce numéro</button>
+  </form>
+  <p class="hero__secondary">
+    Vous avez été victime d'une arnaque ? <a href="/signaler">Signalez le numéro</a> pour avertir les prochains.
+  </p>
+</section>
+
+<section class="container stats-strip" aria-label="Chiffres de la plateforme">
+  <div><strong>{{ total_numeros }}</strong><span>numéros dans la base</span></div>
+  <div><strong>{{ total_signalements }}</strong><span>signalements publiés</span></div>
+</section>
+
+<section class="container how-it-works">
+  <h2>Comment ça marche</h2>
+  <ol class="steps">
+    <li><strong>Vérifiez</strong> un numéro avant d'y envoyer un dépôt Mobile Money ou de finaliser un achat.</li>
+    <li><strong>Signalez</strong> un numéro si vous avez été victime, avec votre récit et vos preuves.</li>
+    <li>Chaque signalement passe par une <strong>modération humaine</strong> avant publication.</li>
+    <li>Le score affiché reflète la <strong>corroboration entre plusieurs signalements indépendants</strong>, jamais un jugement sur une seule déclaration.</li>
+  </ol>
+  <p><a href="/comment-ca-marche">Lire la méthodologie complète →</a></p>
+</section>
+{% endblock %}
